@@ -68,12 +68,40 @@ def home():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    error = None
     if request.method == "POST":
-        user = User.query.filter_by(username=request.form["username"]).first()
-        if user and check_password_hash(user.password, request.form["password"]):
+        user = User.query.filter_by(
+            username=request.form["username"]
+        ).first()
+
+        if user and check_password_hash(
+            user.password,
+            request.form["password"]
+        ):
             login_user(user)
             return redirect("/dashboard")
-    return render_template("login.html")
+        else:
+            error = "Invalid login or password"
+
+    return render_template("login.html", error=error)
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect("/login")
+@app.route("/create-admin")
+def create_admin():
+    if User.query.filter_by(username="admin").first():
+        return "Admin already exists"
+
+    admin = User(
+        username="admin",
+        password=generate_password_hash("admin123"),
+        role="ADMIN"
+    )
+    db.session.add(admin)
+    db.session.commit()
+    return "Admin created"
 
 # CALCULATOR
 @app.route("/calc")

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Orders CRM</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<h1>📋 Orders CRM</h1>
+<a href="/export">⬇ Export to Excel</a>
+<br><br>
+
+<table border="1" cellpadding="10" cellspacing="0">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Client Name</th>
+            <th>Phone</th>
+            <th>City</th>
+            <th>Furniture Type</th>
+            <th>Material</th>
+            <th>Width</th>
+            <th>Height</th>
+            <th>Status</th>
+            <th>Change</th>
+
+            <th>Price ($)</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for order in orders %}
+        <tr>
+            <td>{{ order.status }}</td>
+
+            <td>
+                <a href="/order/{{ order.id }}/status/IN_WORK">▶ Work</a> |
+                <a href="/order/{{ order.id }}/status/PRODUCTION">🏭 Prod</a> |
+                <a href="/order/{{ order.id }}/status/DONE">✅ Done</a>
+            </td>
+
+            <td>{{ order.id }}</td>
+            <td>{{ order.client.name }}</td>
+            <td>{{ order.client.phone }}</td>
+            <td>{{ order.client.city }}</td>
+            <td>{{ order.furniture_type }}</td>
+            <td>{{ order.material }}</td>
+            <td>{{ order.width }}</td>
+            <td>{{ order.height }}</td>
+            <td><strong>{{ order.price }}</strong></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<br>
+<a href="/">⬅ Back to calculator</a>
+
+</body>
+</html>

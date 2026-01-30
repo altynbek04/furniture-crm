@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<h1>Calculation Result</h1>
+
+<p>Type: {{ furniture_type }}</p>
+<p>Material: {{ material }}</p>
+<p>Area: {{ area }} m2</p>
+<h2>Total Price: {{ price }} $</h2>
+
+<a href="/">⬅ Back</a>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CEO Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<h1>📊 CEO Dashboard</h1>
+
+<div class="dashboard">
+
+  <div class="card">
+    <h3>Total Orders</h3>
+    <p>{{ total_orders }}</p>
+  </div>
+
+  <div class="card">
+    <h3>Total Revenue</h3>
+    <p>{{ total_revenue }} $</p>
+  </div>
+
+  <div class="card status new">
+    <h3>NEW</h3>
+    <p>{{ new_count }}</p>
+  </div>
+
+  <div class="card status work">
+    <h3>IN WORK</h3>
+    <p>{{ in_work_count }}</p>
+  </div>
+
+  <div class="card status prod">
+    <h3>PRODUCTION</h3>
+    <p>{{ production_count }}</p>
+  </div>
+
+  <div class="card status done">
+    <h3>DONE</h3>
+    <p>{{ done_count }}</p>
+  </div>
+
+</div>
+
+<br>
+<a href="/orders">📋 Orders</a> |
+<a href="/">🧮 Calculator</a>
+
+</body>
+</html>
